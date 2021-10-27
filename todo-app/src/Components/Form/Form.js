@@ -2,11 +2,11 @@ import React, { useState } from "react";
 import "./style.css";
 
 function Form() {
-  const [values, setValues] = useState([{
+  const [values, setValues] = useState({
     firstName: "",
     lastName: "",
     email: ""
-  }]);
+  });
   
   const [submitted, setSubmitted] = useState(false);
 
@@ -23,12 +23,13 @@ function Form() {
 }
 
 const handleSubmit = (event) => {
-    event.preventDefault();
+    
     setSubmitted(true);
     // window.onbeforeunload = function() {
-        localStorage.setItem("values", JSON.stringify(values))
-
-    // }
+      const details = JSON.parse(localStorage.getItem('values'));
+      // console.log("details", details);
+      const arrayDetials = details ? [...details, values] : [values]
+    localStorage.setItem('values', JSON.stringify(arrayDetials));
     
 
 }
