@@ -23,13 +23,27 @@ function Form() {
 }
 
 const handleSubmit = (event) => {
+    event.preventDefault();
     
     setSubmitted(true);
     // window.onbeforeunload = function() {
-      const details = JSON.parse(localStorage.getItem('values'));
-      // console.log("details", details);
-      const arrayDetials = details ? [...details, values] : [values]
-    localStorage.setItem('values', JSON.stringify(arrayDetials));
+    //   const details = JSON.parse(localStorage.getItem('values'));
+    //   // console.log("details", details);
+    //   const arrayDetials = details ? [...details, values] : [values]
+    // localStorage.setItem('values', JSON.stringify(arrayDetials));
+
+    const arr=[];
+
+    const storageValue = JSON.parse(localStorage.getItem('values'));
+     if(storageValue){
+       arr.push(...storageValue,values);
+     }
+     else{
+       arr.push(values)
+     }
+     
+    
+    localStorage.setItem('values', JSON.stringify(arr));
     
 
 }
